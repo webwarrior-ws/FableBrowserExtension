@@ -22,3 +22,8 @@ jobs:
       run: dotnet fable --outDir "extension"
     - name: Pack
       run: npm run pack
+    - name: Upload extension as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: extension
+        path: extension/web-ext-artifacts/*.zip
