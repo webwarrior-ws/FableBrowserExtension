@@ -7,7 +7,8 @@ on:
 
 jobs:
   buildAndPack:
-    runs-on: ubuntu-latest
+    # Use MacOS because on ubunut-latest, Fable hangs for some reason.
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v4
