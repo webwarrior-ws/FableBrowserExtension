@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  buildAndPack:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Restore dependencies
+      run: |
+        dotnet tool restore
+        dotnet restore
+    - name: install npm packages
+      run: npm install
+    - name: Build
+      run: dotnet fable --outDir "extension"
+    - name: Pack
+      run: npm run pack
