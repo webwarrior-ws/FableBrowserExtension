@@ -6,7 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Program.fs" />
+    <Content Include="extension\popup.html" />
+    <Content Include="extension\icons\icon-32.png" />
+    <Content Include="extension\icons\icon-48.png" />
+    <Content Include="extension\manifest.json" />
+    <Content Include="package.json" />
+    <Content Include="index.html" />
+    <Compile Include="Popup.fs" />
   </ItemGroup>
 
   <ItemGroup>
