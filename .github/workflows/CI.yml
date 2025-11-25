@@ -7,18 +7,28 @@ on:
 
 jobs:
   buildAndPack:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+        - ubuntu-latest
+        - macOS-latest
+        fableVersion:
+        - "4.27.0"
+        - "5.0.0-alpha.15"
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v4
     - name: Restore dependencies
       run: |
+        dotnet tool install fable --version ${{ matrix.fableVersion }}
         dotnet tool restore
         dotnet restore
     - name: install npm packages
       run: npm install
     - name: Build
-      run: dotnet fable --outDir "extension"
+      run: dotnet fable --outDir "extension" --verbose
     - name: Pack
       run: npm run pack
     - name: Upload extension as artifact
@@ -26,3 +36,6 @@ jobs:
       with:
         name: extension
         path: extension/web-ext-artifacts/*.zip
+        # Overwrite the artifact instead of failing.
+        # This is needed because different combinations of (OS, Fable version) will try to upload the same artifact.
+        overwrite: true
