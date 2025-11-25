@@ -10,6 +10,15 @@
 
   "permissions": [ "activeTab" ],
 
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "@example-fable-extension",
+      "data_collection_permissions": {
+        "required": [ "none" ]
+      }
+    }
+  },
+
   "browser_action": {
     "default_icon": "icons/icon-32.png",
     "default_title": "ExampleFableExtension",
